@@ -19,7 +19,7 @@ public class OpenAIAdapter {
 
     public OpenAIAdapter() {
         OPEN_API_KEY = System.getenv("OPEN_API_KEY");
-        service = new OpenAiService("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");
+        service = new OpenAiService(OPEN_API_KEY);
         this.applicationTemplates = List.of(
                 new ServiceTemplate(),
                 new ControllerTemplate(),
