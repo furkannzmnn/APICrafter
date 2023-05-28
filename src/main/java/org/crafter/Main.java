@@ -1,7 +1,12 @@
 package org.crafter;
 
+import org.crafter.adapters.OpenAIAdapter;
+import picocli.CommandLine;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        OpenAIAdapter openAIAdapter = new OpenAIAdapter();
+
+        new CommandLine(new ProjectStarter(openAIAdapter)).execute("-p", "my-project", "-t", "java", "-d", "my-project-dir", "-i", "my-subject");
     }
 }
