@@ -17,14 +17,14 @@ Follow these steps to get started with ApiCrafter:
 
 1. Install ApiCrafter by running the following command:
     
-        ```bash
+
         npm install -g apicrafter
-        ```
+ 
 2. Create a new Spring API project using the following command:
 
-        ```bash
+      
         apicrafter create my-api-project
-        ```
+    
 
 3. Customize your API by modifying the generated code and configurations according to your requirements.
 
