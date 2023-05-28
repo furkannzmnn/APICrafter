@@ -43,10 +43,7 @@ public class ProjectStarter implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        System.out.println("Project name: " + projectName);
-        System.out.println("Project type: " + projectType);
-        System.out.println("Project directory: " + projectDirectory);
-        System.out.println("Subject: " + subject);
-        return 0;
+        openAIAdapter.createProject(subject);
+        return 1;
     }
 }

@@ -7,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         OpenAIAdapter openAIAdapter = new OpenAIAdapter();
 
-        new CommandLine(new ProjectStarter(openAIAdapter)).execute("-p", "my-project", "-t", "java", "-d", "my-project-dir", "-i", "my-subject");
+        int execute = new CommandLine(new ProjectStarter(openAIAdapter))
+                .execute("-p", "my-project", "-t", "java", "-d", "my-project-dir", "-i", "e ticaret");
+
+
     }
 }
