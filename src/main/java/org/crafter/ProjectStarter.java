@@ -47,7 +47,7 @@ public class ProjectStarter implements Callable<Integer> {
     public Integer call() {
         PROJECT_INFO.put("projectName", projectName);
         PROJECT_INFO.put("projectType", projectType);
-        PROJECT_INFO.put("projectDirectory", projectDirectory);
+        PROJECT_INFO.put("projectDirectory", "project");
         openAIAdapter.createProject("e-ticaret");
         return 1;
     }

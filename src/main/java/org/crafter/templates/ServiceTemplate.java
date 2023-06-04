@@ -24,7 +24,10 @@ public class ServiceTemplate implements ApplicationTemplate {
                 %s
                 Servis kuralları şu şekildedir:
                 1. Servis sınıfları interface olmamalıdır.
-                2. Methodların içi dolu olmalıdır.                               
+                2. Methodların içi dolu olmalıdır.
+                3. Servis sınıfları org.crafter.services paketinde olmalıdır.
+                4. İmportlar otomatik olarak eklenmelidir.
+                5. En az 2 servis sınıfı olmalıdır.               
                 Cevap olarak yalnızca kod ver, yorum satırı yazma.
                 """.formatted(subject, repositoryAnswer);
     }
