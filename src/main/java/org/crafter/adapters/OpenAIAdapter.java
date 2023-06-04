@@ -15,18 +15,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class OpenAIAdapter {
-
     public static final ConcurrentHashMap<String, String> ANSWERS = new ConcurrentHashMap<>();
 
     private final OpenAiService service;
     private final List<ApplicationTemplate> applicationTemplates;
-    private final String OPEN_API_KEY;
-
-
 
     public OpenAIAdapter() {
-        OPEN_API_KEY = System.getenv("OPEN_API_KEY");
-        service = new OpenAiService(OPEN_API_KEY);
+        service = new OpenAiService("d"+System.getenv("OPEN_API_KEY"));
         this.applicationTemplates = List.of(
                 new ModelTemplate(),
                 new RepositoryTemplate(),

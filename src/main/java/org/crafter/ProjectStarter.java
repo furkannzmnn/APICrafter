@@ -1,6 +1,7 @@
 package org.crafter;
 
 import org.crafter.adapters.OpenAIAdapter;
+import org.crafter.util.BaseDirectoryCreator;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -43,12 +44,29 @@ public class ProjectStarter implements Callable<Integer> {
     )
     private String subject;
 
+
     @Override
     public Integer call() {
         PROJECT_INFO.put("projectName", projectName);
         PROJECT_INFO.put("projectType", projectType);
-        PROJECT_INFO.put("projectDirectory", "project");
-        openAIAdapter.createProject("e-ticaret");
+        PROJECT_INFO.put("projectDirectory", BaseDirectoryCreator.createBaseDirectory(projectDirectory));
+        openAIAdapter.createProject(subject);
         return 1;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public String getProjectDirectory() {
+        return projectDirectory;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 }
