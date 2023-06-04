@@ -4,8 +4,10 @@ import org.crafter.adapters.OpenAIAdapter;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ProjectStarter implements Callable<Integer> {
+    public static final ConcurrentHashMap<String, String> PROJECT_INFO = new ConcurrentHashMap<>();
 
     private final OpenAIAdapter openAIAdapter;
 
@@ -43,7 +45,10 @@ public class ProjectStarter implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        openAIAdapter.createProject(subject);
+        PROJECT_INFO.put("projectName", projectName);
+        PROJECT_INFO.put("projectType", projectType);
+        PROJECT_INFO.put("projectDirectory", projectDirectory);
+        openAIAdapter.createProject("e-ticaret");
         return 1;
     }
 }
