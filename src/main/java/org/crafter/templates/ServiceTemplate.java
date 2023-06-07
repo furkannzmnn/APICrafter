@@ -2,9 +2,7 @@ package org.crafter.templates;
 
 import org.crafter.util.ClassWriter;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +22,10 @@ public class ServiceTemplate implements ApplicationTemplate {
                 %s
                 Servis kuralları şu şekildedir:
                 1. Servis sınıfları interface olmamalıdır.
-                2. Methodların içi dolu olmalıdır.
+                2. Methodların içi dolu olmalıdır ve db ile iletişime geçmelidir ve yorum satırı içermemeli.
                 3. Servis sınıfları org.crafter.services paketinde olmalıdır.
                 4. İmportlar otomatik olarak eklenmelidir.
-                5. En az 2 servis sınıfı olmalıdır.               
+                5. En az model sayısı kadar servis sınıfı olmalıdır.      
                 Cevap olarak yalnızca kod ver, yorum satırı yazma.
                 """.formatted(subject, repositoryAnswer);
     }
@@ -39,8 +37,6 @@ public class ServiceTemplate implements ApplicationTemplate {
         List<String> classNames = new ArrayList<>();
         StringBuilder classString = new StringBuilder();
         String directory = PROJECT_INFO.get("projectDirectory") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "org" + File.separator + "crafter" + File.separator + "services";
-
-        // Gelen sınıfları parse et ve her sınıfı bir mape ekle, key olarak sınıfın ismini kullan
         Map<String, String> classes = new HashMap<>();
 
         for (String line : lines) {
@@ -55,12 +51,11 @@ public class ServiceTemplate implements ApplicationTemplate {
             classString.append(line).append("\n"); // Append each line to the StringBuilder
         }
 
-        // Son sınıfı ekle
+        // add last class
         if (!className.isEmpty()) {
             classes.put(className, classString.toString());
         }
 
-        // Parse edilen sınıfları yazdır
         for (String name : classNames) {
             writeEfficientFile(name, classes.get(name), directory);
         }

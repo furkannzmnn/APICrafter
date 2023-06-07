@@ -9,6 +9,6 @@ public class Main {
 
 
         int execute = new CommandLine(new ProjectStarter(openAIAdapter))
-                .execute("-p", "my-project", "-t", "java", "-d", "project", "-s", "e ticaret");
+                .execute("-p", "my-project", "-t", "java", "-d", "project", "-s", "e ticaret projesi");
     }
 }
