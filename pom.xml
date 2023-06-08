@@ -33,6 +33,14 @@
                 <artifactId>service</artifactId>
                 <version>0.12.0</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.fusesource.jansi</groupId>
+                <artifactId>jansi</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+
         </dependencies>
 
 </project>

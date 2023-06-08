@@ -1,5 +1,7 @@
 package org.crafter.templates;
 
+import org.crafter.util.ClassWriter;
+
 import java.io.File;
 import java.util.List;
 
@@ -9,11 +11,12 @@ public class ControllerTemplate implements ApplicationTemplate{
         return """
                 %s konulu bir proje yazıyorum spring boot ile. Bana bu projede olması gereken controller sınıfları
                 yazar mısın ? Yazarken sadece java sınıf kodları yaz.
-                """.formatted(subject);
+                """
+                .formatted(subject);
     }
 
     @Override
     public void parseAnswer(String answer) {
-
+        defaultParseAnswer(answer, "controllers");
     }
 }

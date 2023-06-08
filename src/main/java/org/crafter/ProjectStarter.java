@@ -2,6 +2,7 @@ package org.crafter;
 
 import org.crafter.adapters.OpenAIAdapter;
 import org.crafter.util.BaseDirectoryCreator;
+import org.crafter.util.LandingPage;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -47,13 +48,16 @@ public class ProjectStarter implements Callable<Integer> {
 
     @Override
     public Integer call() {
+        System.out.print("Starting project");
+        LandingPage.showLandingPage().showLoadingBar();
         PROJECT_INFO.put("projectName", projectName);
         PROJECT_INFO.put("projectType", projectType);
         PROJECT_INFO.put("projectDirectory", BaseDirectoryCreator.createBaseDirectory(projectDirectory));
         openAIAdapter.createProject(subject);
+        System.out.println("Project created!");
+
         return 1;
     }
-
     public String getProjectName() {
         return projectName;
     }

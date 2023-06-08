@@ -21,7 +21,7 @@ public class OpenAIAdapter {
     private final List<ApplicationTemplate> applicationTemplates;
 
     public OpenAIAdapter() {
-        service = new OpenAiService("d"+System.getenv("OPEN_API_KEY"));
+        service = new OpenAiService("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", Duration.of(5, ChronoUnit.MINUTES));
         this.applicationTemplates = List.of(
                 new ModelTemplate(),
                 new RepositoryTemplate(),

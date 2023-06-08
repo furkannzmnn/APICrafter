@@ -11,6 +11,6 @@ public class ModelTemplate implements ApplicationTemplate{
 
     @Override
     public void parseAnswer(String answer) {
-
+        defaultParseAnswer(answer, "models");
     }
 }
