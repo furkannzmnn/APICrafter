@@ -1,7 +1,6 @@
 package org.crafter;
 
 import org.crafter.adapters.OpenAIAdapter;
-import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
 
 public class Main {
