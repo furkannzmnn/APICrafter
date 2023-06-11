@@ -12,11 +12,9 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
-import static org.crafter.IoContainer.autoLoadInClassBean;
 
 public class OpenAIAdapter {
     private final OpenAiService service;
@@ -41,7 +39,7 @@ public class OpenAIAdapter {
             CompletionResult result = service.createCompletion(request);
             String answer = result.getChoices().stream().map(CompletionChoice::getText).collect(Collectors.joining());
             applicationTemplate.parseAnswer(answer);
-            postCreateActions.forEach(PostCreateAction::execute);
         }
+        postCreateActions.forEach(PostCreateAction::execute);
     }
 }

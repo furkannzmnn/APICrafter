@@ -1,12 +1,9 @@
 package org.crafter;
 
-import org.crafter.adapters.OpenAIAdapter;
-import org.crafter.templates.*;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 
-import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class IoContainer {
@@ -72,27 +69,5 @@ public class IoContainer {
             fillBeanInIoContainer(entry.getKey(), entry.getValue());
         }
     }
-
-    public static void autoLoadInClassBean(Class<?> classz) {
-        // verilen sınıfın içindeki tüm beanlari consturctor ile oluşturup initialize et
-
-        Constructor<?>[] constructors = classz.getConstructors();
-
-        for (Constructor<?> constructor : constructors) {
-            Class<?>[] parameterTypes = constructor.getParameterTypes();
-            Object[] parameters = new Object[parameterTypes.length];
-
-            for (int i = 0; i < parameterTypes.length; i++) {
-                parameters[i] = getBean(parameterTypes[i].getSimpleName());
-            }
-
-            try {
-                constructor.newInstance(parameters);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
 
 }
