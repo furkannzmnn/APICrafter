@@ -4,29 +4,27 @@ import com.theokanning.openai.completion.CompletionChoice;
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.CompletionResult;
 import com.theokanning.openai.service.OpenAiService;
-import org.crafter.templates.*;
+import org.crafter.IoContainer;
+import org.crafter.templates.ApplicationTemplate;
+import org.crafter.templates.PostCreateAction;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class OpenAIAdapter {
-    public static final ConcurrentHashMap<String, String> ANSWERS = new ConcurrentHashMap<>();
-
     private final OpenAiService service;
-    private final List<ApplicationTemplate> applicationTemplates;
+    private final List<ApplicationTemplate> applicationTemplates = new CopyOnWriteArrayList<>();
+    private final List<PostCreateAction> postCreateActions = new CopyOnWriteArrayList<>();
 
     public OpenAIAdapter() {
-        service = new OpenAiService("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", Duration.of(5, ChronoUnit.MINUTES));
-        this.applicationTemplates = List.of(
-                new ModelTemplate(),
-                new RepositoryTemplate(),
-                new ServiceTemplate(),
-                new ControllerTemplate()
+        service = new OpenAiService("", Duration.of(5, ChronoUnit.MINUTES));
+        IoContainer.fillBeanInIoContainer(
+                Map.of("applicationTemplates", applicationTemplates, "postCreateActions", postCreateActions)
         );
     }
 

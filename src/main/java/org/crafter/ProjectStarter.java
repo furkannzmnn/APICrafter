@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProjectStarter implements Callable<Integer> {
+    public static final ConcurrentHashMap<String, String> ANSWERS = new ConcurrentHashMap<>();
     public static final ConcurrentHashMap<String, String> PROJECT_INFO = new ConcurrentHashMap<>();
 
     private final OpenAIAdapter openAIAdapter;
@@ -55,7 +56,6 @@ public class ProjectStarter implements Callable<Integer> {
         PROJECT_INFO.put("projectDirectory", BaseDirectoryCreator.createBaseDirectory(projectDirectory));
         openAIAdapter.createProject(subject);
         System.out.println("Project created!");
-
         return 1;
     }
     public String getProjectName() {

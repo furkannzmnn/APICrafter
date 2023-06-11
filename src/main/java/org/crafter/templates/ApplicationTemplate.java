@@ -1,5 +1,6 @@
 package org.crafter.templates;
 
+import org.crafter.Ioc;
 import org.crafter.util.ClassWriter;
 
 import java.io.File;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 import static org.crafter.ProjectStarter.PROJECT_INFO;
 
-public interface ApplicationTemplate {
+public interface ApplicationTemplate extends Ioc {
     String prompt(String subject);
 
     void parseAnswer(String answer);

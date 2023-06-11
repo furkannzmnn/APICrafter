@@ -1,10 +1,5 @@
 package org.crafter.templates;
 
-import org.crafter.util.ClassWriter;
-
-import java.io.File;
-import java.util.List;
-
 public class ControllerTemplate implements ApplicationTemplate{
     @Override
     public String prompt(String subject) {

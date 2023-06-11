@@ -1,12 +1,6 @@
 package org.crafter.templates;
 
-import org.crafter.util.ClassWriter;
-
-import java.io.File;
-import java.util.*;
-
-import static org.crafter.ProjectStarter.PROJECT_INFO;
-import static org.crafter.adapters.OpenAIAdapter.ANSWERS;
+import static org.crafter.ProjectStarter.ANSWERS;
 
 public class ServiceTemplate implements ApplicationTemplate {
 
