@@ -1,5 +1,8 @@
 package org.crafter.templates;
 
+import org.crafter.Bean;
+
+@Bean(name = "applicationTemplates")
 public class ControllerTemplate implements ApplicationTemplate{
     @Override
     public String prompt(String subject) {

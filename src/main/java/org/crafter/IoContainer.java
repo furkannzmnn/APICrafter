@@ -2,27 +2,31 @@ package org.crafter;
 
 import org.crafter.adapters.OpenAIAdapter;
 import org.crafter.templates.*;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 public class IoContainer {
     private static final Map<String, List<Class<?>>> BEANS = new HashMap<>();
 
     static {
-        BEANS.put("openAIAdapter", List.of(OpenAIAdapter.class));
-        BEANS.put("projectStarter", List.of(ProjectStarter.class));
-        BEANS.put("gitStrategy", List.of(GitPushService.class));
-        BEANS.put("applicationTemplates", List.of(
-                ModelTemplate.class,
-                RepositoryTemplate.class,
-                ServiceTemplate.class,
-                ControllerTemplate.class
-        ));
-        BEANS.put("postCreateActions", List.of(
-                GitPushService.class
-        ));
+
+        Reflections reflections = new Reflections("org.crafter", new TypeAnnotationsScanner(), new SubTypesScanner());
+
+        Set<Class<?>> constructors = reflections.getTypesAnnotatedWith(Bean.class);
+
+        for (Class<?> classz : constructors) {
+            Bean annotation = classz.getAnnotation(Bean.class);
+            String beanName = annotation.name();
+
+            List<Class<?>> beanImplementations = BEANS.getOrDefault(beanName, new ArrayList<>());
+            beanImplementations.add(classz);
+            BEANS.put(beanName, beanImplementations);
+        }
+
     }
 
     public static <T> T getBean(String beanName) {
@@ -66,6 +70,27 @@ public class IoContainer {
     public static void fillBeanInIoContainer(Map<String, List<? extends Ioc>> beans) {
         for (Map.Entry<String, List<? extends Ioc>> entry : beans.entrySet()) {
             fillBeanInIoContainer(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public static void autoLoadInClassBean(Class<?> classz) {
+        // verilen sınıfın içindeki tüm beanlari consturctor ile oluşturup initialize et
+
+        Constructor<?>[] constructors = classz.getConstructors();
+
+        for (Constructor<?> constructor : constructors) {
+            Class<?>[] parameterTypes = constructor.getParameterTypes();
+            Object[] parameters = new Object[parameterTypes.length];
+
+            for (int i = 0; i < parameterTypes.length; i++) {
+                parameters[i] = getBean(parameterTypes[i].getSimpleName());
+            }
+
+            try {
+                constructor.newInstance(parameters);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

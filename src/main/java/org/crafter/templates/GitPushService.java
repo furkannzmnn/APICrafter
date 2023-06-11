@@ -1,7 +1,9 @@
 package org.crafter.templates;
 
-import static org.crafter.ProjectStarter.PROJECT_INFO;
+import org.crafter.Bean;
 
+import static org.crafter.ProjectStarter.PROJECT_INFO;
+@Bean(name = "postCreateActions")
 public class GitPushService implements GitStrategy, PostCreateAction {
 
     private final String projectPath;

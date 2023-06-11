@@ -1,5 +1,6 @@
 package org.crafter.templates;
 
+import org.crafter.Bean;
 import org.crafter.util.ClassWriter;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import static org.crafter.ProjectStarter.ANSWERS;
 import static org.crafter.ProjectStarter.PROJECT_INFO;
+@Bean(name = "applicationTemplates")
 
 public class RepositoryTemplate implements ApplicationTemplate {
     @Override

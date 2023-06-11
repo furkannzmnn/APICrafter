@@ -16,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+import static org.crafter.IoContainer.autoLoadInClassBean;
+
 public class OpenAIAdapter {
     private final OpenAiService service;
     private final List<ApplicationTemplate> applicationTemplates = new CopyOnWriteArrayList<>();
@@ -39,6 +41,7 @@ public class OpenAIAdapter {
             CompletionResult result = service.createCompletion(request);
             String answer = result.getChoices().stream().map(CompletionChoice::getText).collect(Collectors.joining());
             applicationTemplate.parseAnswer(answer);
+            postCreateActions.forEach(PostCreateAction::execute);
         }
     }
 }

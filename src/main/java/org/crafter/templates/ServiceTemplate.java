@@ -1,7 +1,9 @@
 package org.crafter.templates;
 
-import static org.crafter.ProjectStarter.ANSWERS;
+import org.crafter.Bean;
 
+import static org.crafter.ProjectStarter.ANSWERS;
+@Bean(name = "applicationTemplates")
 public class ServiceTemplate implements ApplicationTemplate {
 
     @Override
