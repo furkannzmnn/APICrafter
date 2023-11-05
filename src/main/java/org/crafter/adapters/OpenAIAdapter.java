@@ -5,11 +5,12 @@ import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.CompletionResult;
 import com.theokanning.openai.service.OpenAiService;
 import org.crafter.IoContainer;
-import org.crafter.templates.ApplicationTemplate;
+import org.crafter.templates.business.ApplicationTemplate;
 import org.crafter.templates.PostCreateAction;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -29,7 +30,7 @@ public class OpenAIAdapter {
     }
 
     public void createProject(String subject) {
-        for (ApplicationTemplate applicationTemplate : applicationTemplates) {
+        applicationTemplates.stream().sorted(Comparator.comparing(ApplicationTemplate::order)).forEach(applicationTemplate -> {
             String prompt = applicationTemplate.prompt(subject);
             CompletionRequest request = new CompletionRequest();
             request.setPrompt(prompt);
@@ -39,7 +40,8 @@ public class OpenAIAdapter {
             CompletionResult result = service.createCompletion(request);
             String answer = result.getChoices().stream().map(CompletionChoice::getText).collect(Collectors.joining());
             applicationTemplate.parseAnswer(answer);
-        }
+
+        });
         postCreateActions.forEach(PostCreateAction::execute);
     }
 }

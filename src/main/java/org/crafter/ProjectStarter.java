@@ -58,19 +58,4 @@ public class ProjectStarter implements Callable<Integer> {
         System.out.println("Project created!");
         return 1;
     }
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public String getProjectType() {
-        return projectType;
-    }
-
-    public String getProjectDirectory() {
-        return projectDirectory;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
 }

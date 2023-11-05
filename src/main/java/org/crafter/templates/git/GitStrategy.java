@@ -1,4 +1,4 @@
-package org.crafter.templates;
+package org.crafter.templates.git;
 
 public interface GitStrategy {
     void gitInit();

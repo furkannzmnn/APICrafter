@@ -23,4 +23,17 @@ public class ClassWriter {
             LOGGER.warning(e.getMessage());
         }
     }
+
+    public static String getClassName(String classWithContent) {
+        String[] lines = classWithContent.split("\n");
+        String className = "";
+        for (String line : lines) {
+            if (line.startsWith("public class") || line.startsWith("public interface")) {
+                className = line.split(" ")[2];
+            }
+        }
+        return className;
+    }
+
+
 }

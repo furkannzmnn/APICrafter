@@ -1,4 +1,4 @@
-package org.crafter.templates;
+package org.crafter.templates.business;
 
 import org.crafter.Bean;
 
@@ -9,10 +9,10 @@ public class ServiceTemplate implements ApplicationTemplate {
     @Override
     public String prompt(String subject) {
         String repositoryAnswer = ANSWERS.get(RepositoryTemplate.class.getSimpleName());
-        return """
-                %s konulu bir proje yazıyorum spring boot ile. Bana bu projede olması gereken servis sınıflarını
+        return STR."""
+                Bana bu projede olması gereken servis sınıflarını
                 yazar mısın ? Yazarken sadece java sınıf kodları yaz. Projenin Repository sınıfları aşşağıdaki gibidir
-                %s
+                \{repositoryAnswer}
                 Servis kuralları şu şekildedir:
                 1. Servis sınıfları interface olmamalıdır.
                 2. Methodların içi dolu olmalıdır ve db ile iletişime geçmelidir ve yorum satırı içermemeli.
@@ -20,11 +20,16 @@ public class ServiceTemplate implements ApplicationTemplate {
                 4. İmportlar otomatik olarak eklenmelidir.
                 5. En az model sayısı kadar servis sınıfı olmalıdır.      
                 Cevap olarak yalnızca kod ver, yorum satırı yazma.
-                """.formatted(subject, repositoryAnswer);
+                """;
     }
 
     @Override
     public void parseAnswer(String answer) {
         defaultParseAnswer(answer, "services");
+    }
+
+    @Override
+    public Integer order() {
+        return 2;
     }
 }

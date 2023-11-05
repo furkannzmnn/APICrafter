@@ -1,6 +1,7 @@
-package org.crafter.templates;
+package org.crafter.templates.git;
 
 import org.crafter.Bean;
+import org.crafter.templates.PostCreateAction;
 
 import static org.crafter.ProjectStarter.PROJECT_INFO;
 @Bean(name = "postCreateActions")
